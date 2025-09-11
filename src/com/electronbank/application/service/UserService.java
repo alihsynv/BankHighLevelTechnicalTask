@@ -1,0 +1,4 @@
+package com.electronbank.application.service;
+
+public interface UserService {
+}
