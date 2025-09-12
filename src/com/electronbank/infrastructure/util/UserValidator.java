@@ -1,12 +1,43 @@
 package com.electronbank.infrastructure.util;
 
 import com.electronbank.domain.exception.InvalidBirthdayException;
+import com.electronbank.domain.exception.InvalidFinException;
+import com.electronbank.domain.exception.InvalidNameException;
 import com.electronbank.domain.exception.InvalidPasswordException;
+import com.electronbank.infrastructure.repository.UserRepository;
 
 import java.time.LocalDate;
 
 public class UserValidator {
-    public static void isValidDate(LocalDate dateOfBirth) throws InvalidBirthdayException {
+    private static UserRepository userRepository;
+
+    public UserValidator(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+
+    public static void validateFullName(String name, String surname) throws InvalidNameException {
+        if (name == null || name.isEmpty()) {
+            throw new InvalidNameException("Ad boş ola bilməz!");
+        }
+        if (surname == null || surname.isEmpty()) {
+            throw new InvalidNameException("Soyad boş ola bilməz!");
+        }
+    }
+
+    public static void validateFin(String fin) throws InvalidFinException {
+        if (fin == null || fin.isEmpty()) {
+            throw new InvalidFinException("FIN kod boş ola bilməz!");
+        }
+        if (fin.length() != 7) {
+            throw new InvalidFinException("FIN kod 7 simvoldan ibarət olmalıdır!");
+        }
+        if (userRepository.findByFin(fin)) {
+            throw new InvalidFinException("İstifadəçi artıq mövcuddur. Giriş edin!");
+        }
+    }
+
+    public static void validateDate(LocalDate dateOfBirth) throws InvalidBirthdayException {
         if (dateOfBirth == null) {
             throw new InvalidBirthdayException("Doğum tarixini girin!");
         }
