@@ -12,6 +12,15 @@ public class User {
     private LocalDate dateOfBirth;
     private Phone phone;
 
+    public User(String fin, String password, String name, String surname, LocalDate dateOfBirth,  Phone phone) {
+        this.fin = fin;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.dateOfBirth = dateOfBirth;
+        this.phone = phone;
+    }
+
     public String getFin() {
         return fin;
     }

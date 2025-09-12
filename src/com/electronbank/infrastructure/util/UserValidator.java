@@ -1,12 +1,12 @@
 package com.electronbank.infrastructure.util;
 
-import com.electronbank.domain.exception.InvalidBirthdayException;
-import com.electronbank.domain.exception.InvalidFinException;
-import com.electronbank.domain.exception.InvalidNameException;
-import com.electronbank.domain.exception.InvalidPasswordException;
+import com.electronbank.domain.exception.*;
+import com.electronbank.domain.value.Phone;
 import com.electronbank.infrastructure.repository.UserRepository;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 public class UserValidator {
     private static UserRepository userRepository;
@@ -81,6 +81,23 @@ public class UserValidator {
         }
         if (!hasSpecial) {
             throw new RuntimeException("Şifrədə ən azı 1 xüsusi simvol olmalıdır!");
+        }
+    }
+
+    public static void validatePhone(Phone phone) {
+        List<String> validProvider = Arrays.asList("50", "51", "10", "99", "55", "77", "70", "60");
+
+        if (!validProvider.contains(phone.getProviderCode())) {
+            throw new InvaliidPhoneNumberException("Yanlış provider kodu");
+        }
+        if(phone.getNumber() == null || phone.getNumber().length() != 7) {
+            throw new InvaliidPhoneNumberException("Nömrə 7 rəqəm olmalıdır");
+        }
+
+        for (char c : phone.getNumber().toCharArray()) {
+            if(!Character.isDigit(c)) {
+                throw new InvaliidPhoneNumberException("Nömrə yalnız rəqəmlərdən ibarət olmalıdır");
+            }
         }
     }
 }
