@@ -12,7 +12,7 @@ public class UserValidator {
     private static UserRepository userRepository;
 
     public UserValidator(UserRepository userRepository) {
-        this.userRepository = userRepository;
+        UserValidator.userRepository = userRepository;
     }
 
 
@@ -65,7 +65,7 @@ public class UserValidator {
                 hasLowercase = true;
             } else if (Character.isDigit(c)) {
                 hasNumber = true;
-            } else if (specialChars.indexOf(c) > 0) {
+            } else if (specialChars.indexOf(c) >= 0) {
                 hasSpecial = true;
             }
         }
@@ -77,27 +77,27 @@ public class UserValidator {
             throw new InvalidPasswordException("Şifrədə ən azı 1 kiçik hərf olmalıdır!");
         }
         if (!hasNumber) {
-            throw new RuntimeException("Şifrədə ən azı 1 rəqəm olmalıdır!");
+            throw new InvalidPasswordException("Şifrədə ən azı 1 rəqəm olmalıdır!");
         }
         if (!hasSpecial) {
-            throw new RuntimeException("Şifrədə ən azı 1 xüsusi simvol olmalıdır!");
+            throw new InvalidPasswordException("Şifrədə ən azı 1 xüsusi simvol olmalıdır!");
         }
     }
 
-    public static void validatePhone(Phone phone) {
-        List<String> validProvider = Arrays.asList("50", "51", "10", "99", "55", "77", "70", "60");
-
-        if (!validProvider.contains(phone.getProviderCode())) {
-            throw new InvaliidPhoneNumberException("Yanlış provider kodu");
-        }
-        if(phone.getNumber() == null || phone.getNumber().length() != 7) {
-            throw new InvaliidPhoneNumberException("Nömrə 7 rəqəm olmalıdır");
-        }
-
-        for (char c : phone.getNumber().toCharArray()) {
-            if(!Character.isDigit(c)) {
-                throw new InvaliidPhoneNumberException("Nömrə yalnız rəqəmlərdən ibarət olmalıdır");
-            }
-        }
-    }
+//    public static void validatePhone(Phone phone) {
+//        List<String> validProvider = Arrays.asList("50", "51", "10", "99", "55", "77", "70", "60");
+//
+//        if (!validProvider.contains(phone.getProviderCode())) {
+//            throw new InvaliidPhoneNumberException("Yanlış provider kodu");
+//        }
+//        if(phone.getNumber() == null || phone.getNumber().length() != 7) {
+//            throw new InvaliidPhoneNumberException("Nömrə 7 rəqəm olmalıdır");
+//        }
+//
+//        for (char c : phone.getNumber().toCharArray()) {
+//            if(!Character.isDigit(c)) {
+//                throw new InvaliidPhoneNumberException("Nömrə yalnız rəqəmlərdən ibarət olmalıdır");
+//            }
+//        }
+//    }
 }

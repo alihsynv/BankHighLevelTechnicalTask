@@ -2,6 +2,6 @@ package com.electronbank.infrastructure.repository;
 
 import com.electronbank.domain.entity.Transaction;
 
-public class TransactionRepository extends Repository<Transaction, String>
+public class TransactionRepository implements Repository<Transaction, String>
 {
 }

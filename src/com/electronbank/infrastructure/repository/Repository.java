@@ -1,4 +1,4 @@
 package com.electronbank.infrastructure.repository;
 
-public class Repository <T, ID>{
+public interface Repository <T, ID>{
 }

@@ -4,7 +4,7 @@ import com.electronbank.domain.entity.User;
 
 import java.util.List;
 
-public interface UserRepository {
+public interface UserRepository extends Repository<User, String>{
     void save(User user);
     boolean findByFin(String fin);
     User getUserByFin(String fin);
