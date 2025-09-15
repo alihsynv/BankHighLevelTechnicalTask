@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
         if (!userRepository.findByFin(fin)) {
             throw new InvalidLoginException("İstifadəçi tapılmadı. Qeydiyyatdan keçin!");
         }
-        if (!user.getPassword().equals(password)) {
+        if (!userRepository.getUserByFin(fin).getPassword().equals(password)) {
             throw new InvalidLoginException("Şifrə səhvdir!");
         }
         return  user;

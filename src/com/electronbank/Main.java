@@ -3,6 +3,8 @@ package com.electronbank;
 
 import com.electronbank.application.service_impl.UserServiceImpl;
 import com.electronbank.domain.entity.User;
+import com.electronbank.domain.exception.InvalidLoginException;
+import com.electronbank.domain.exception.InvalidRegisterException;
 import com.electronbank.domain.value.Phone;
 import com.electronbank.infrastructure.repository.UserRepository;
 import com.electronbank.infrastructure.repository.inMemory.InMemoryUserRepository;
@@ -25,14 +27,14 @@ public class Main {
         try {
             User newUser = new User("6x9mvl4", "Ali@123456", "Əli", "Hüseynov", LocalDate.of(2000, 3,17) , new Phone("51","8869807"));
             userService.registerUser(newUser);
-        } catch (Exception e) {
+        } catch (InvalidRegisterException e) {
             System.out.println(e.getMessage());
         }
 
         // 2️⃣ Login
         try {
             userService.login("6x9mvl4", "Ali@123456");
-        } catch (Exception e) {
+        } catch (InvalidLoginException e) {
             System.out.println(e.getMessage());
         }
 
