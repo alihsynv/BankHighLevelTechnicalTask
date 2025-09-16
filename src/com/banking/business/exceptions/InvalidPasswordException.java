@@ -1,6 +1,8 @@
 package com.banking.business.exceptions;
 
-public class InvalidPasswordException extends InvalidRegisterException {
+import com.banking.core.exceptions.BaseException;
+
+public class InvalidPasswordException extends BaseException {
     public InvalidPasswordException(String message) {
         super(message);
     }

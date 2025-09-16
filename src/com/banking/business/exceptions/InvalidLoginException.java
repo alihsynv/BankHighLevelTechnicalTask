@@ -1,6 +1,8 @@
 package com.banking.business.exceptions;
 
-public class InvalidLoginException extends RuntimeException {
+import com.banking.core.exceptions.BaseException;
+
+public class InvalidLoginException extends BaseException {
     public InvalidLoginException(String message) {
         super(message);
     }

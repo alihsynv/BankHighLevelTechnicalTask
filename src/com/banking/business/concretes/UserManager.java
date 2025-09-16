@@ -1,9 +1,9 @@
 package com.banking.business.concretes;
 
 import com.banking.business.abstracts.UserService;
+import com.banking.core.exceptions.BaseException;
 import com.banking.entities.concretes.User;
 import com.banking.business.exceptions.InvalidLoginException;
-import com.banking.business.exceptions.InvalidRegisterException;
 import com.banking.business.exceptions.UserNotFoundException;
 import com.banking.entities.concretes.Phone;
 import com.banking.dataAccess.abstarcts.UserRepository;
@@ -12,18 +12,15 @@ import com.banking.business.validationRules.UserValidator;
 import java.time.LocalDate;
 import java.util.List;
 
-public class UserServiceImpl implements UserService {
+public class UserManager implements UserService {
     private final UserRepository userRepository;
-    private final UserValidator userValidator;
     private User user;
 
-
-    public UserServiceImpl(UserRepository userRepository, UserValidator userValidator) {
+    public UserManager(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.userValidator = userValidator;
     }
 
-    public void registerUser(String fin, String password, String name, String surname, LocalDate dateOfBirth, String providerCode, String number) throws InvalidRegisterException {
+    public void registerUser(String fin, String password, String name, String surname, LocalDate dateOfBirth, String providerCode, String number) throws BaseException {
         Phone phone = Phone.create(providerCode, number);
         User newUser = new User(fin, password, name, surname, dateOfBirth, phone);
 

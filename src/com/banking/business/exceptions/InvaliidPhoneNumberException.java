@@ -1,6 +1,8 @@
 package com.banking.business.exceptions;
 
-public class InvaliidPhoneNumberException extends RuntimeException {
+import com.banking.core.exceptions.BaseException;
+
+public class InvaliidPhoneNumberException extends BaseException {
     public InvaliidPhoneNumberException(String message) {
         super(message);
     }

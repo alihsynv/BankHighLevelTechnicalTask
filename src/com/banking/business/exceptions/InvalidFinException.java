@@ -1,6 +1,8 @@
 package com.banking.business.exceptions;
 
-public class InvalidFinException extends InvalidRegisterException {
+import com.banking.core.exceptions.BaseException;
+
+public class InvalidFinException extends BaseException {
     public InvalidFinException(String message) {
         super(message);
     }
