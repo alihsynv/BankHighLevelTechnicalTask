@@ -1,8 +1,8 @@
 package com.banking.dataAccess.concretes.inmem;
 
-import com.banking.entities.concretes.User;
 import com.banking.business.exceptions.UserNotFoundException;
 import com.banking.dataAccess.abstarcts.UserRepository;
+import com.banking.entities.concretes.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +40,6 @@ public class InMemoryUserRepository implements UserRepository {
     @Override
     public List<User> findAll() {
         for (User user : users) {
-//            System.out.println("Ad: " + user.getName() + "\n" + "Soyad: " + user.getSurname() + "\n" + "FIN: " + user.getFin());
-//            System.out.println();
             return users;
         }
         throw new UserNotFoundException("Not found user");
