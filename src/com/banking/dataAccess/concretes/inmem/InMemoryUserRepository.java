@@ -27,7 +27,7 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public User getUserByFin(String fin) {
+    public User getUserByFin(String fin) throws  UserNotFoundException {
         for (User user : users) {
             if (user.getFin().equals(fin)) {
                 return user;
@@ -38,7 +38,7 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public List<User> findAll() {
+    public List<User> findAll() throws  UserNotFoundException {
         for (User user : users) {
             return users;
         }
