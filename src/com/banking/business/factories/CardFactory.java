@@ -1,7 +1,8 @@
 package com.banking.business.factories;
 
 import com.banking.business.exceptions.CreditCardCreationException;
-import com.banking.entities.concretes.Card;
+import com.banking.entities.concretes.CreditCard;
+import com.banking.entities.concretes.DebitCard;
 import com.banking.entities.enums.CardType;
 import com.banking.entities.enums.CreditCategory;
 
@@ -11,35 +12,30 @@ import java.util.Random;
 public class CardFactory {
     private static final Random RANDOM = new Random();
 
-    public static Card createDebitCard(String cardName) {
-        String pan = generatePan();
-        String cvc = generateCvc();
-        return new Card(
-                pan,
+    public static DebitCard createDebitCard(String cardName, String userFin) {
+        return new DebitCard(
+                generatePan(),
                 cardName,
                 CardType.DEBIT,
-                cvc,
+                generateCvc(),
                 0.0,
                 LocalDate.now().plusYears(2),
                 false,
-                null) {
-        };
+                userFin);
     }
 
-    public static Card createCreditCard(String cardName, CreditCategory creditCategory, Double monthlyIncome) {
-        double limit = calculateCreditLimit(creditCategory, monthlyIncome);
-        String pan = generatePan();
-        String cvc = generateCvc();
-        return new Card(
-                pan,
+    public static CreditCard createCreditCard(String cardName, String userFin, CreditCategory creditCategory, Double monthlyIncome) {
+        return new CreditCard(
+                generatePan(),
                 cardName,
                 CardType.CREDIT,
-                cvc,
-                limit,
+                generateCvc(),
                 LocalDate.now().plusYears(2),
-                true,
-                null) {
-        };
+                false,
+                userFin,
+                creditCategory,
+                calculateCreditLimit(creditCategory, monthlyIncome),
+                monthlyIncome);
     }
 
     private static String generatePan() {
@@ -51,11 +47,11 @@ public class CardFactory {
     }
 
     private static String generateCvc() {
-        int cvc = RANDOM.nextInt(1000); // 0 - 999
+        int cvc = RANDOM.nextInt(1000);
         return String.format("%03d", cvc);
     }
 
-    private static Double calculateCreditLimit(CreditCategory creditCategory, Double monthlyIncome) throws CreditCardCreationException {
+    public static Double calculateCreditLimit(CreditCategory creditCategory, Double monthlyIncome) throws CreditCardCreationException {
         return switch (creditCategory) {
             case STUDENT, PENSIONER -> monthlyIncome * 2;
             case EMPLOYEE -> monthlyIncome * 4;

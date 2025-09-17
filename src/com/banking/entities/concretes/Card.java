@@ -10,17 +10,15 @@ public abstract class Card implements BaseEntity {
     private String cardName;
     private CardType cardType;
     private String cvc;
-    private Double balance;
     private LocalDate expiryDate;
     private boolean blocked;
     private String userFin;
 
-    public Card(String pan, String cardName, CardType cardType, String cvc, Double balance, LocalDate expiryDate, boolean blocked, String userFin) {
+    public Card(String pan, String cardName, CardType cardType, String cvc, LocalDate expiryDate, boolean blocked, String userFin) {
         this.pan = pan;
         this.cardName = cardName;
         this.cardType = cardType;
         this.cvc = cvc;
-        this.balance = balance;
         this.expiryDate = expiryDate;
         this.blocked = blocked;
         this.userFin = userFin;
@@ -30,9 +28,6 @@ public abstract class Card implements BaseEntity {
         return pan;
     }
 
-    public void setPan(String pan) {
-        this.pan = pan;
-    }
 
     public String getCardName() {
         return cardName;
@@ -46,25 +41,11 @@ public abstract class Card implements BaseEntity {
         return cardType;
     }
 
-    public void setCardType(CardType cardType) {
-        this.cardType = cardType;
-    }
 
     public String getCvc() {
         return cvc;
     }
 
-    public void setCvc(String cvc) {
-        this.cvc = cvc;
-    }
-
-    public Double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
 
     public LocalDate getExpiryDate() {
         return expiryDate;

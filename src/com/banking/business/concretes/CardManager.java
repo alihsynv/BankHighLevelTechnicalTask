@@ -17,14 +17,14 @@ public class CardManager implements CardService {
 
     @Override
     public Card createDebitCard(String userFin, String cardName) {
-        Card card = CardFactory.createDebitCard(cardName);
+        Card card = CardFactory.createDebitCard(cardName, userFin);
         cardRepository.save(userFin, card);
         return card;
     }
 
     @Override
     public Card createCreditCard(String userFin, String cardName, CreditCategory creditCategory, Double monthlyIncome) {
-        Card card = CardFactory.createCreditCard(cardName, creditCategory, monthlyIncome);
+        Card card = CardFactory.createCreditCard(cardName, userFin, creditCategory, monthlyIncome);
         cardRepository.save(userFin, card);
         return card;
     }
@@ -40,14 +40,18 @@ public class CardManager implements CardService {
     }
 
     @Override
-    public void blockCard(String pan) {
-        Card card = CardFactory.createDebitCard(pan);
-        card.setBlocked(true);
+    public void blockCard(String pan , String userFin) {
+        Card card = CardFactory.createDebitCard(pan,  userFin);
+        if (!card.isBlocked()) {
+            card.setBlocked(true);
+        }
     }
 
     @Override
-    public void unblockCard(String pan) {
-        Card card = CardFactory.createDebitCard(pan);
-        card.setBlocked(false);
+    public void unblockCard(String pan, String userFin) {
+        Card card = CardFactory.createDebitCard(pan, userFin);
+        if (card.isBlocked()) {
+            card.setBlocked(false);
+        }
     }
 }
