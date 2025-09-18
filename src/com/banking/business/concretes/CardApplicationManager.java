@@ -1,6 +1,8 @@
 package com.banking.business.concretes;
 
 import com.banking.business.abstracts.CardApplicationService;
+import com.banking.business.exceptions.CardNotFoundException;
+import com.banking.business.exceptions.InvalidFinException;
 import com.banking.business.exceptions.InvalidLimitException;
 import com.banking.business.exceptions.UserNotFoundException;
 import com.banking.business.factories.CardFactory;
@@ -13,7 +15,7 @@ public class CardApplicationManager implements CardApplicationService {
     private final UserRepository userRepository;
     private final CardManager cardManager;
 
-    public CardApplicationManager(UserRepository userRepository, CardFactory cardFactory, CardManager cardManager) {
+    public CardApplicationManager(UserRepository userRepository, CardManager cardManager) {
         this.userRepository = userRepository;
         this.cardManager = cardManager;
     }
@@ -48,6 +50,14 @@ public class CardApplicationManager implements CardApplicationService {
 
     @Override
     public void cancelApplication(String userFin) {
-
+        var user = userRepository.getUserByFin(userFin);
+        if (user == null) {
+            throw new InvalidFinException("Belə FIN ilə istifadəçi tapılmadı!");
+        }
+        if (user.getCards().isEmpty()) {
+            throw new CardNotFoundException("İstifadəçinin heç bir kart müraciəti yoxdur!");
+        }
+        user.getCards().clear();
+        userRepository.update(user);
     }
 }

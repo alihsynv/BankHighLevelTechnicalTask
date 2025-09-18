@@ -17,6 +17,26 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
+    public void update(User user) throws UserNotFoundException {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getFin().equals(user.getFin())) {
+                users.set(i, user);
+                return;
+            }
+        }
+        throw new UserNotFoundException("İstifadəçi tapılmadı!");
+    }
+
+    @Override
+    public void delete(String fin) throws UserNotFoundException {
+        User user = getUserByFin(fin);
+        if (user == null) {
+            throw new UserNotFoundException("İstifadəçi tapılmadı!");
+        }
+        users.remove(user);
+    }
+
+    @Override
     public boolean findByFin(String fin) {
         for (User user : users) {
             if (user.getFin().equals(fin)) {
@@ -27,7 +47,7 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public User getUserByFin(String fin) throws  UserNotFoundException {
+    public User getUserByFin(String fin) throws UserNotFoundException {
         for (User user : users) {
             if (user.getFin().equals(fin)) {
                 return user;
@@ -38,7 +58,7 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public List<User> findAll() throws  UserNotFoundException {
+    public List<User> findAll() throws UserNotFoundException {
         for (User user : users) {
             return users;
         }

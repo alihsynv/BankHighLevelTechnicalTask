@@ -6,11 +6,11 @@ import com.banking.entities.enums.CardType;
 import java.time.LocalDate;
 
 public abstract class Card implements BaseEntity {
-    private String pan;
-    private String cardName;
-    private CardType cardType;
-    private String cvc;
-    private LocalDate expiryDate;
+    private final String pan;
+    private final String cardName;
+    private final CardType cardType;
+    private final String cvc;
+    private final LocalDate expiryDate;
     private boolean blocked;
     private String userFin;
 
@@ -33,10 +33,6 @@ public abstract class Card implements BaseEntity {
         return cardName;
     }
 
-    public void setCardName(String cardName) {
-        this.cardName = cardName;
-    }
-
     public CardType getCardType() {
         return cardType;
     }
@@ -49,10 +45,6 @@ public abstract class Card implements BaseEntity {
 
     public LocalDate getExpiryDate() {
         return expiryDate;
-    }
-
-    public void setExpiryDate(LocalDate expiryDate) {
-        this.expiryDate = expiryDate;
     }
 
     public boolean isBlocked() {
