@@ -12,7 +12,7 @@ public interface CardService {
 
     List<Card> getUserCards(String userFin);
 
-    Card getCardByPan(String pan);
+    String getCardDetails(String pan, String fin, String password);
 
     void blockCard(String pan, String userFin);
 

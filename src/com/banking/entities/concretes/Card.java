@@ -4,6 +4,7 @@ import com.banking.entities.abstarcts.BaseEntity;
 import com.banking.entities.enums.CardType;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public abstract class Card implements BaseEntity {
     private final String pan;
@@ -13,6 +14,7 @@ public abstract class Card implements BaseEntity {
     private final LocalDate expiryDate;
     private boolean blocked;
     private String userFin;
+    private List<String> operationHistories;
 
     public Card(String pan, String cardName, CardType cardType, String cvc, LocalDate expiryDate, boolean blocked, String userFin) {
         this.pan = pan;

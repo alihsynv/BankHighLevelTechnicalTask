@@ -17,6 +17,26 @@ public class InMemoryCardRepository implements CardRepository {
     }
 
     @Override
+    public void update(Card card) throws CardNotFoundException {
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).getUserFin().equals(card.getUserFin())) {
+                cards.set(i, card);
+                return;
+            }
+        }
+        throw new CardNotFoundException("Kart tapılmadı!");
+    }
+
+    @Override
+    public void delete(String pan) throws CardNotFoundException {
+        Card card = findByPan(pan);
+        if (card == null) {
+            throw new CardNotFoundException("Kart tapılmadı!");
+        }
+        cards.remove(card);
+    }
+
+    @Override
     public Card findByPan(String pan) throws CardNotFoundException {
         for (Card card : cards) {
             if (card.getPan().equals(pan)) {
