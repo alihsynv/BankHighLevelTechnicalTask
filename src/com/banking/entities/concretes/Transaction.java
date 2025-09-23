@@ -6,7 +6,7 @@ import com.banking.entities.enums.TransactionType;
 import java.time.LocalDate;
 
 public class Transaction implements BaseEntity {
-    private final String id;
+    private final Integer id;
     private final String senderCardPan;
     private final String receiverCardPan;
     private final Double amount;
@@ -16,7 +16,7 @@ public class Transaction implements BaseEntity {
     private final LocalDate transactionDate;
     private final TransactionType transactionType;
 
-    public Transaction(String id, String senderCardPan, String receiverCardPan, Double amount, Double commission,
+    public Transaction(Integer id, String senderCardPan, String receiverCardPan, Double amount, Double commission,
                        Double initialBalance, Double finalBalance, LocalDate transactionDate, TransactionType transactionType) {
         this.id = id;
         this.senderCardPan = senderCardPan;
@@ -29,7 +29,7 @@ public class Transaction implements BaseEntity {
         this.transactionType = transactionType;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 

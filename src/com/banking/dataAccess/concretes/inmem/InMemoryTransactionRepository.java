@@ -35,7 +35,7 @@ public class InMemoryTransactionRepository implements TransactionRepository {
     }
 
     @Override
-    public Transaction getById(String id) {
+    public Transaction getById(String id) throws TransactionNotFoundException {
         for (Transaction transaction : transactions) {
             if (transaction.getId().equals(id)) {
                 return transaction;
@@ -45,7 +45,7 @@ public class InMemoryTransactionRepository implements TransactionRepository {
     }
 
     @Override
-    public List<Transaction> getByCardPan(String pan) {
+    public List<Transaction> getByCardPan(String pan) throws TransactionNotFoundException {
         for (Transaction transaction : transactions) {
             if (transaction.getSenderCardPan().equals(pan) || transaction.getReceiverCardName().equals(pan)) {
                 return transactions;

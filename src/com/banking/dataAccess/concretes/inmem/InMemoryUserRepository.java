@@ -62,6 +62,6 @@ public class InMemoryUserRepository implements UserRepository {
         for (User user : users) {
             return users;
         }
-        throw new UserNotFoundException("Not found user");
+        throw new UserNotFoundException("İstifadəçi tapılmadı");
     }
 }
