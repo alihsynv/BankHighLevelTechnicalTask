@@ -26,7 +26,7 @@ public class InMemoryTransactionRepository implements TransactionRepository {
     }
 
     @Override
-    public void delete(String id) throws TransactionNotFoundException {
+    public void delete(Integer id) throws TransactionNotFoundException {
         Transaction transaction = getById(id);
         if (transaction == null) {
             throw new TransactionNotFoundException("Tranzaksiya tapılmadı!");
@@ -35,7 +35,7 @@ public class InMemoryTransactionRepository implements TransactionRepository {
     }
 
     @Override
-    public Transaction getById(String id) throws TransactionNotFoundException {
+    public Transaction getById(Integer id) throws TransactionNotFoundException {
         for (Transaction transaction : transactions) {
             if (transaction.getId().equals(id)) {
                 return transaction;

@@ -9,9 +9,9 @@ public interface TransactionRepository extends Repository<Transaction, String> {
 
     void update(Transaction transaction);
 
-    void delete(String id);
+    void delete(Integer id);
 
-    Transaction getById(String id);
+    Transaction getById(Integer id);
 
     List<Transaction> getByCardPan(String pan);
 }
