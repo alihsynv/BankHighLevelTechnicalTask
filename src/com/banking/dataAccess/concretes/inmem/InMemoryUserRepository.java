@@ -1,6 +1,6 @@
 package com.banking.dataAccess.concretes.inmem;
 
-import com.banking.business.exceptions.UserNotFoundException;
+import com.banking.exceptions.custom.UserNotFoundException;
 import com.banking.dataAccess.abstarcts.UserRepository;
 import com.banking.entities.concretes.User;
 

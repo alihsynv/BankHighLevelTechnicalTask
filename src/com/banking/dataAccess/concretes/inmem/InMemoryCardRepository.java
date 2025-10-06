@@ -1,6 +1,6 @@
 package com.banking.dataAccess.concretes.inmem;
 
-import com.banking.business.exceptions.CardNotFoundException;
+import com.banking.exceptions.custom.CardNotFoundException;
 import com.banking.dataAccess.abstarcts.CardRepository;
 import com.banking.entities.concretes.Card;
 
