@@ -1,6 +1,6 @@
 package com.banking.dataAccess.concretes.inmem;
 
-import com.banking.business.exceptions.TransactionNotFoundException;
+import com.banking.exceptions.custom.TransactionNotFoundException;
 import com.banking.dataAccess.abstarcts.TransactionRepository;
 import com.banking.entities.concretes.Transaction;
 

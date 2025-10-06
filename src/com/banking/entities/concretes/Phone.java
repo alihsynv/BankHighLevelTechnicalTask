@@ -1,10 +1,11 @@
 package com.banking.entities.concretes;
 
-import com.banking.business.exceptions.InvalidPhoneNumberException;
 import com.banking.entities.abstarcts.BaseEntity;
+import com.banking.exceptions.custom.InvalidPhoneNumberException;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Phone implements BaseEntity {
     private final String countryCode = "+994";
@@ -22,7 +23,7 @@ public class Phone implements BaseEntity {
         if (!validProvider.contains(providerCode)) {
             throw new InvalidPhoneNumberException("Yanlış provider kodu");
         }
-        if (number == null || number.length() != 7) {
+        if (Objects.isNull(number) || number.length() != 7) {
             throw new InvalidPhoneNumberException("Nömrə 7 rəqəm olmalıdır");
         }
 
@@ -33,7 +34,6 @@ public class Phone implements BaseEntity {
         }
         return new Phone(providerCode, number);
     }
-
 
     public String getProviderCode() {
         return providerCode;
